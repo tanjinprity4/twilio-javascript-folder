@@ -21,9 +21,53 @@ function get_args(){
     return args;
 }  // End of function
 
-// Testing 
+/*
+ Calculates using operands and operand from the user 
+ and returns the result.
+*/
+function calculate(){
+    // Initialize variables with the second, third, and fourth arguments from user input.
+    let op = get_args();
+    const firstOperand = Number(op[0]);
+    const secondOperand = Number(op[2]);
+    const operator = op[1];
+
+    // Initialize variable to hold result of operations.
+    var result;
+
+    // Conditions to determine what the operation is from the user input and calculate the result.
+    if (operator === '+') { // Addition
+        result = firstOperand + secondOperand;
+    } else if (operator === '-') {  // Subtraction
+        result = firstOperand - secondOperand;
+    } else if (operator === 'x') {  // Multiplication
+        result = firstOperand * secondOperand;
+    } else if (operator === '/') {  // Division
+        result = firstOperand / secondOperand;
+    } else if (operator === '^') {  // Exponents
+        result = firstOperand ** secondOperand;
+    } else if (operator === '%') {  // Modulus
+        result = firstOperand % secondOperand;
+    } else if (operator === '<<') {  // Shift left
+        result = firstOperand << secondOperand;
+    } else if (operator === '>>') {  // Shift right
+        result = firstOperand >> secondOperand;
+    } else { // Error management
+        console.log("Operator not recognized. Please enter a valid operator.");
+        console.log("Valid Operators are: \nAddition: +, Subtraction: -, Multiplication: x, Division: /, Exponents: ^, Modulus: %, Shift left: <<, Shift right: >>");
+    }
+
+    return result;
+}  // End of function
+
+// Testing phase 1
 let op = get_args();  // Code to check that the get_args function returns an array
 // Prints arguments to the terminal.
+console.log("Phase 1 test");
 console.log("The first operand is: ", op[0]);
 console.log("The second operand is: ", op[2]);
 console.log("The operator is: ", op[1]);
+
+// Testing Phase 2
+console.log("\nPhase 2 test");
+console.log("The result is: ", calculate());
