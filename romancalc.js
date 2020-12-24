@@ -60,14 +60,69 @@ function calculate(){
     return result;
 }  // End of function
 
+/*
+Takes a string of characters(Roman letters) as input and 
+converts it to an integer, and 
+returns the converted integer.
+*/
+function romanToInt(str1){
+    // If no string with roman numerals is passed, function returns -1.
+    if (str1 == null) {
+        return -1;
+    }
+
+    // Initialize variable to hold result of convertion from roman numeral to integer. 
+    var integer = romanCharToInt(str1.charAt(0));
+    // Declare variables to hold intermediate values while iterating through given string.
+    var pre, curr;
+    
+    /* 
+    Initialize a for loop that iterates from 1 to length of the string and 
+    convert roman numerals to integer.
+    */
+    for (var i = 1; i < str1.length; i++) {
+        curr = romanCharToInt(str1.charAt(i));  //  Convert roman numeral at ith position to integer.
+        pre = romanCharToInt(str1.charAt(i-1));  //  Convert roman numeral at (i-1)th position to integer.
+
+        /*
+        If integer of current/ ith numeral is 
+        smaller than that of previous numeral,
+        add integer of current/ith numeral to the result.
+        */
+        if (curr <= pre){   
+            integer += curr;    
+        } else {
+            integer = integer - pre*2 + curr;
+        }
+    }     // End of loop
+    return integer;
+}     // End of function
+
+function romanCharToInt(c) {
+    switch (c) {
+        case 'I': return 1;
+        case 'V': return 5;
+        case 'X': return 10;
+        case 'L': return 50;
+        case 'C': return 100;
+        case 'D': return 500;
+        case 'M': return 1000;
+        default: return -1;
+    }
+}
+
+
 // Testing phase 1
 let op = get_args();  // Code to check that the get_args function returns an array
 // Prints arguments to the terminal.
-console.log("Phase 1 test");
-console.log("The first operand is: ", op[0]);
-console.log("The second operand is: ", op[2]);
-console.log("The operator is: ", op[1]);
+// console.log("Phase 1 test");
+// console.log("The first operand is: ", op[0]);
+// console.log("The second operand is: ", op[2]);
+// console.log("The operator is: ", op[1]);
 
-// Testing Phase 2
-console.log("\nPhase 2 test");
-console.log("The result is: ", calculate());
+// // Testing Phase 2
+// console.log("\nPhase 2 test");
+// console.log("The result is:", calculate());
+
+// Testing Phase 3
+console.log("Roman Numerals to Int conversion:", romanToInt(op[0]));
