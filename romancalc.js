@@ -22,7 +22,7 @@ function get_args(){
 }  // End of function
 
 /*
- Calculates using operands and operand from the user 
+ Calculates using operands and operator from the user 
  and returns the result.
 */
 function calculate(){
@@ -98,6 +98,7 @@ function romanToInt(str1){
     return integer;
 }     // End of function
 
+// Helper function to convert a roman numeral to Int.
 function romanCharToInt(c) {
     switch (c) {
         case 'I': return 1;
@@ -109,7 +110,42 @@ function romanCharToInt(c) {
         case 'M': return 1000;
         default: return -1;
     }
-}
+}     // End of function
+
+/*
+Takes an integer as input and 
+converts it to a string of characters(Roman numerals), and 
+returns the converted roman numerals.
+*/
+function intToRoman(int) {        
+    var integer = Number(int);
+
+    // Check if given value is integer.
+    if (!Number.isInteger(integer)){
+        return 'NaN (error)'
+    }
+
+    // Initialize variable to hold result of convertion from integer to roman numeral. 
+    var roman = '';
+    
+    // Dictionary that holds the integer values of roman letters. Keys hold roman numerals and values hold their respective integers.
+    var roman_numerals = {'M': 1000, 'CM': 900, 'D': 500, 'CD': 400, 'C': 100, 'XC': 90, 'L': 50, 'XL': 40, 'X': 10, 'IX': 9, 'V': 5, 'IV': 4, 'I' : 1};
+    
+    /* 
+    Initializing a for loop that iterates through all the keys in roman_numerals dictionary.
+    In each iteration, we are adding/repeating a roman numeral(key) to the string as many times as 
+    we can divide given number by int value of key.
+    Since that numeral is added as many times [0...inf] needed already, 
+    we only use the remainder from (given integer / value of key) for next operation.
+    */
+    for (var key in roman_numerals)
+    {
+        roman += key.repeat(integer / roman_numerals[key]);  
+        integer %= roman_numerals[key];
+    }     // End of loop
+
+    return roman;
+}     // End of function
 
 
 // Testing phase 1
@@ -125,4 +161,7 @@ let op = get_args();  // Code to check that the get_args function returns an arr
 // console.log("The result is:", calculate());
 
 // Testing Phase 3
-console.log("Roman Numerals to Int conversion:", romanToInt(op[0]));
+// console.log("Roman Numerals to Int conversion:", romanToInt(process.argv[2]));
+
+// Testing Phase 4
+console.log("Int to Roman Numerals conversion:", intToRoman(process.argv[2]));
